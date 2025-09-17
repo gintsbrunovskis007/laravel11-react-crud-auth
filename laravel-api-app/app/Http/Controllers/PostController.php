@@ -3,19 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use GuzzleHttp\Middleware;
+
+// THIS FUCKING IMPORT WAS FUCKING EVERYTHING UP, BECAUSE IT NOW THE RIGHT IMPORT, SHIT!
+// use GuzzleHttp\Middleware;
 // use App\Http\Requests\StorePostRequest;
 // use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller implements HasMiddleware
 {
 
     public static function middleware()
     {
+
+        // return [
+        //     ['auth:sanctum', ['except' => ['index', 'show']]]
+        // ];
+
         return [
             new Middleware('auth:sanctum', except: ['index', 'show'])
+            // Middleware::make('auth:sanctum')->except(['index', 'show'])
         ];
     }
 
@@ -24,7 +34,13 @@ class PostController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        return Post::all();
+
+        // eager loading
+
+        // return all of the posts with the user who created them
+        return Post::with('user')->latest()->get();
+
+        // return Post::all();
         // returns all of the posts.
     }
 
@@ -44,7 +60,12 @@ class PostController extends Controller implements HasMiddleware
         $post = $request->user()->posts()->create($fields);
 
         // return ['post' => $post];
-        return $post;
+
+        // this doesnt put the username
+        // return $post;
+
+        // call the user instance of that post
+        return ['post' => $post, 'user' => $post->user];
     }
 
     /**
@@ -53,7 +74,8 @@ class PostController extends Controller implements HasMiddleware
     public function show(Post $post)
     {
         // return ['post' => $post];
-        return $post;
+        // return $post;
+        return ['post' => $post, 'user' => $post->user];
     }
 
     /**
@@ -70,7 +92,8 @@ class PostController extends Controller implements HasMiddleware
         ]);
 
         $post->update($fields);
-        return $post;
+        // return $post;
+        return ['post' => $post, 'user' => $post->user];
     }
 
     /**
