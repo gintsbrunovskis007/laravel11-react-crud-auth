@@ -32,20 +32,25 @@ export default function Layout() {
   return (
     <>
       <header>
-        <nav>
-          <Link to="/" className="nav-link">
-            Home
-          </Link>
+        <nav className="bg-blue-700 text-white">
+          <Link to="/">Home</Link>
 
           {user ? (
             <div>
               <p>WELCOME BACK {user.name}!</p>
 
               {/* new post */}
-              <Link to="/create">New Post</Link>
+              <Link
+                to="/create"
+                className="bg-blue-400 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out"
+              >
+                Create New Post
+              </Link>
 
               <form onSubmit={handleLogout}>
-                <button>Logout</button>
+                <button className="bg-red-400 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md cursor-pointer transition duration-300 ease-in-out">
+                  Logout
+                </button>
               </form>
             </div>
           ) : (

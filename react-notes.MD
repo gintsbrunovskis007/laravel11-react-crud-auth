@@ -154,3 +154,5 @@ but we dont want a user to reach another users post update page if they do not o
 \***\*\*\*\*\*\***we don't need to return the user for "store" and "update" methods in our API. However I added those in case we wanted to have a "posts" state and update that state on create and update. But since we navigate to the home page and fetch the data there, we don't need those return data.\***\*\*\*\*\***
 
 and BOOM app is complete with laravel and react!
+
+NEXT IS TO BUILD INSTAGRAM CLONE!

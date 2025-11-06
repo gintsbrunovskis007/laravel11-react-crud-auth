@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <>
       {/* <h1 className="title">Latest Posts {name}</h1> */}
-      <h1 className="title">Latest Posts</h1>
+      <h1>Latest Posts</h1>
       {posts.length > 0 ? (
         posts.map((post) => (
           <div key={post.id}>

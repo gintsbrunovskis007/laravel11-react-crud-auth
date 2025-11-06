@@ -54,7 +54,7 @@ export default function Show() {
         <div key={post.id}>
           <div>
             <div>
-              <h2>{post.title}</h2>
+              <h2 className="font-sans text-red">{post.title}</h2>
               <small>
                 Created by {post.user.name} on{" "}
                 {new Date(post.created_at).toLocaleTimeString()}
